@@ -49,8 +49,8 @@ def examplePython(path,board):
         projectStart.close()
 
 def makefile(path,board,port):
-	makefile = "CURRENT_DIRECTORY    = $(shell pwd)\n\n"
-
+	makefile  = "CURRENT_DIRECTORY    = $(shell pwd)\n\n"
+    makefile += "USB_PORT = /dev/tty.usbmodem1421\n"
 	makefile += "MOSPYTHON_DIRECTORY  = "+path+"\n"
 	makefile += "MOSPYTHON            = $(MOSPYTHON_DIRECTORY)/MOSPython.py\n"
 	makefile += "MOSSIMULATOR         = $(MOSPYTHON_DIRECTORY)/MOSSimulatorSetup.py\n"
@@ -58,7 +58,7 @@ def makefile(path,board,port):
 	makefile += "ARDUINO_PROJECT   	 = $(CURRENT_DIRECTORY)/src\n"
 
 	makefile += "all: MOSPython-run\n"
-	makefile += "	$(MAKE) -C $(ARDUINO_PROJECT) MOSLib=$(MOSLib) ARDUINO_PORT="+board+"\n\n"
+	makefile += "	$(MAKE) -C $(ARDUINO_PROJECT) MOSLib=$(MOSLib) ARDUINO_PORT=$(USB_PORT)\n\n"
 
 	makefile += "MOSPython-run:\n"
 	makefile += "	python3 $(MOSPYTHON) $(CURRENT_DIRECTORY)\n"
@@ -71,10 +71,10 @@ def makefile(path,board,port):
 	makefile += "	python3 $(CURRENT_DIRECTORY)/MOSSimulator.py\n"
 
 	makefile += "upload: MOSPython-run\n"
-	makefile += "	$(MAKE) -C $(ARDUINO_PROJECT) MOSLib=$(MOSLib) upload ARDUINO_PORT="+port+"\n\n"
+	makefile += "	$(MAKE) -C $(ARDUINO_PROJECT) MOSLib=$(MOSLib) upload ARDUINO_PORT=$(USB_PORT)\n\n"
 
 	makefile += "upload-store-log: MOSPython-run\n"
-	makefile += "	$(MAKE) -C $(ARDUINO_PROJECT) MOSLib=$(MOSLib) upload-store-log ARDUINO_PORT="+port+"\n\n"
+	makefile += "	$(MAKE) -C $(ARDUINO_PROJECT) MOSLib=$(MOSLib) upload-store-log ARDUINO_PORT=$(USB_PORT)\n\n"
 
 
 	projectMakefile = open(path+"/"+directoryTemplate+"_"+board+"/Makefile", "wt")
