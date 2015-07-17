@@ -52,11 +52,11 @@ You can find your arduino board port by running this command line:
 
 * Go to BlinkLed_uno folder with Terminal
 
-* To upload to Arduino board, run these command line:
+* To upload to Arduino board, run this command line:
 
 `$make upload`
 
-* To upload to Arduino board and store the logs from the board, run these command line:
+* To upload to Arduino board and store the logs from the board, run this command line:
 
 `$make upload-store-log`
 
