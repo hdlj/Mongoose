@@ -1,5 +1,4 @@
-//source : https://balau82.wordpress.com/2014/12/15/arduino-interrupts-in-c-implementing-a-time-switch/
-//source : https://learn.adafruit.com/multi-tasking-the-arduino-part-2/timers
+
 
 #include "timer.h"
 #include <avr/io.h>
@@ -27,7 +26,6 @@ void timer_start(uint16_t ms){
 
 void timer_start_ms (uint16_t ms, void (*action) (void) ){
 	timer_action=action;
-	//timer_ms=ms;
     timer_start (ms);
 }
 
@@ -37,7 +35,7 @@ ISR(TIMER1_OVF_vect){/*timer 1 interrupt service routine */
     timer_counter++;
     if (timer_counter >= timer_overflow_number)
     {
-        //printf("timer triggerred %u \n",timer_overflow_number);
+        
         timer_counter=0;
         timer_action();
     }
