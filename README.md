@@ -63,5 +63,132 @@ You can find your arduino board port by running this command line:
 you can exit the screen mode with `CTRL+A+K` then `Y`
 
 
+## Writing a MongooseOS application
+
+The application needs to implement two functions and import MOSFoundation file:
+
+` from MOSFoundation import * `
+
+` setup `  In this function, all setup operations are done
+
+` loop `   This function is repeat infinitely
+
+
+
+
+#### For loop 
+
+A for loop allows code to be executed a certain number of times. In this example, a counter is implemented 100 times 
+``` 
+counter = 0
+for i in range(100):
+    counter = counter + 1 
+```
+#### If loop
+
+An if loop allows code to be executed only if the boolean condition is satisfied
+
+```
+value = 1
+if value == 1 :
+    value = 0
+elif value = 2 :
+    value = 1
+else : 
+    value = 2
+```
+
+#### While loop
+
+A while loop allows code to be executed repeatly until a condition is statified
+
+```
+counter = 0
+
+while counter < 100:
+    counter = counter +1
+
+```
+
+#### function definition
+
+Functions are defined by: 
+
+```
+def addition( a : int , b : int) -> int :
+    return a + b
+
+```
+
+The type of each function's argument has to be precised and also the return type
+
+#### Supported types
+
+You don't need to specify the type of each variable except functions' arguments and functions' return type. When your code is parsed by MongooseOS, the type of each local variable and global variable will be defined.
+
+MongooseOS supports integers (int), floats (float), strings (str) 
+
+
+## Hardware API
+
+#### Default led
+
+A led is connected to the port 13 on Arduino Uno. This led is named the default led in MongooseOS.
+
+Available functions: 
+
+`   MOSLedSetup()  ` Setup the default led
+
+`   MOSLedOn()     ` Turn on the default led
+
+`   MOSLedOff()    ` Turn off the default led
+
+
+#### Digital port
+
+Arduino Uno has 14 ports (0 to 13). The port 13 is already connected to the default led.
+
+Available functions: 
+
+`   MOSDigitalSetup(2)  ` Setup the port 2
+
+`   MOSDigitalOn(2)     ` Turn on the port 2
+
+`   MOSDigitalOff(2)    ` Turn off the port 2
+
+
+#### Serial communication
+
+You can communicate via the serial port. If you want to see the serial port on your terminal and store the logs in you project folder, use:
+
+` $make upload-store-log `
+
+In order to print a string on the serial port, you can use: 
+
+` print ("hello world") ` like in Python
+
+You can also concatenate two strings :
+
+` print( "hello " + "world" ) `
+
+
+#### Delay
+
+You can let the CPU waits n milliseconds with the delay function :
+
+` delay(1000) ` CPU will wait 1000 milliseconds (i.e. 1 second)
+
+
+## MOSSimulator
+
+MongooseOS provides a simple simulator in order to test your code without an Arduino board
+
+* Open Terminal application and go to your project folder
+* Run this if it is the first time you use it in your project: 
+`$ make MOSSimulator-setup`
+* Run this to launch the simulator: `$ make MOSSimulator-run`
+
+
+
 
 
