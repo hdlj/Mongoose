@@ -4,10 +4,12 @@ Mongoose is a real-time operating system based on a preemptive round robin sched
 
 Time constraints are expressed as delays in applications. These delays have a bounded time error, which is related to the kernel period (quantum). However, a long atomic operation can increase this error. In addition, for long delay, this error becomes unrelated to the kernel period when the scheduler anticipates its overhead (optimized time constraints).
 Mongoose provides an abstraction for hardware events through the event handler process. An application can register a listener to each type of events. The responsive time depends on event’s type, the corresponding listener and applications’ behaviour . Events cannot preempted each other and can be lost because of long computational listeners.
+
 Additionally, Mongoose lets applications communicate with each other through channels. Each channel is one-to-one and cannot be used in two directions. Synchronisation between applications is done with a reader/writer concept. A reader cannot read a value, which has been already read. In the same way, a writer cannot override an unread value. Channel access does not lead to starvation or deadlock thanks to the scheduler fairness. Nonetheless, starvation and deadlock can happen because of the synchronisation mecha- nism.
 
 Drivers for serial communication, digital devices, analog devices have been developed in this project. They offer basic features. Nonetheless, we try to have a clear and consistent hardware API.
 Applications can be written in C, in C++ or with a subset of Python. A development environment has been developed in this project. Python applications are translated to C thanks to the parser developed in this project. Developers can develop applications with any text editor or IDE. Uploading operating is done with a makefile. Clear APIs and the possibility of Python make this operating system more developer friendly.
+
 Mongoose has a small memory footprint: 0.5 of RAM and 6KB of ROM. In addition, time constraints are respected with an error, which can be predicted. Finally, the scheduler provides a predictive behaviour. Therefore, Mongoose respects requirements, quoted in chapter 3, of a real-time operating system and the objectives presented in chapter 1. Nonetheless, Mongoose does not manage Internet protocols.
 
 # Get started
