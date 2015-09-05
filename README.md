@@ -2,7 +2,17 @@
 This project has been submitted in partial fulfillment of the requirements for the MSc Degree in Computing (Software Engineering) of Imperial College London in September 2015. The report of this project can be found in this repository.
 
 
-# Mongoose
+## Table of contents
+
+* [Overview](#overview)
+* [Get Started](#get-started)
+* [Writing an application for Mongoose](#writing-an-application-for-mongoose)
+* [Hardware API](#hardware-api)
+* [Mongoose API](#mongoose-api)
+* [Futur Work](#futur-work)
+
+
+# Overview
 
 Mongoose is a real-time operating system based on a preemptive round robin scheduling with a microkernel architecture. It works on Arduino Uno board with ATMega328p and 2KB of RAM. Multiple applications (up to 3) can run concurrently on the board. Each application is considered as a process with its own stack. They have equal priorities. The quantum (time slice), for the round robin scheduling policy, is 2 ms offering a balance between the scheduler overhead and the impact of the number of processes.
 
@@ -149,11 +159,9 @@ $ cd Example0
 you can exit the screen mode with `CTRL+A+K` then `Y`. The logs will be contained in the current directory
 
 
-# Writing an application for Mongoose: MOSPython
+# Writing an application for Mongoose
 
-Applications can be written in C, C++ or Python.
-
-
+Applications can be written in C, C++ or Python. MOSPython is in charge of parsing Python applications and generating c code.
 
 #### Overview
 
