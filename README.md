@@ -1,3 +1,7 @@
+
+This project has been submitted in partial fulfillment of the requirements for the MSc Degree in Computing (Software Engineering) of Imperial College London in September 2015. The report of this project can be found in this repository.
+
+
 # Mongoose
 
 Mongoose is a real-time operating system based on a preemptive round robin scheduling with a microkernel architecture. It works on Arduino Uno board with ATMega328p and 2KB of RAM. Multiple applications (up to 3) can run concurrently on the board. Each application is considered as a process with its own stack. They have equal priorities. The quantum (time slice), for the round robin scheduling policy, is 2 ms offering a balance between the scheduler overhead and the impact of the number of processes.
