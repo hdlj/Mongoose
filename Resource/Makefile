@@ -1,5 +1,5 @@
 
-#This program is free software: you can redistribute it and/or modify
+#    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
 #    the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
@@ -7,17 +7,24 @@
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.#
+#    GNU General Public License for more details.
 #
 #    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>'''
+#
+#    Date: 2015
+#
+#    File based on this makefile which has been written by olikraus@gmail.com:
+#    https://code.google.com/p/u8glib/source/browse/sys/arduino/U8gLogo/Makefile.105.uno
+#    
+
 
 
 #===============  SETUP   ==============
-ARDUINO_PORT = /dev/tty.usbmodem1421
-ARDUINO_DIR  = /Applications/Arduino.app/Contents/Resources/Java
-AVR_TOOLS_DIR =$(ARDUINO_DIR)/hardware/tools/avr
-AVRDUDE_CONF    = $(AVR_TOOLS_DIR)/etc/avrdude.conf
+ARDUINO_PORT  = /dev/tty.usbmodem1421
+ARDUINO_DIR   = /Applications/Arduino.app/Contents/Resources/Java
+AVR_TOOLS_DIR = $(ARDUINO_DIR)/hardware/tools/avr
+AVRDUDE_CONF  = $(AVR_TOOLS_DIR)/etc/avrdude.conf
 
 #============== Current Time ==========
 CURRENT_TIME=`date +'%y.%m.%d-%H:%M:%S'`
@@ -37,8 +44,12 @@ ARDUINO_SERIAL_PORT_SPEED:=$(shell sed -n -e "s/$(BOARD).upload.speed=\(.*\)/\1/
 PROGRAMMER:=$(shell sed -n -e "s/$(BOARD).upload.protocol=\(.*\)/\1/p" $(BOARDS_TXT))
 
 
-ifndef MOSLib
-$(error MOSLib is not set)
+ifndef OS_PATH
+$(error OS_PATH is not set)
+endif
+
+ifndef PROJECT
+$(error PROJECT is not set)
 endif
 
 ifndef ARDUINO_MCU
@@ -69,9 +80,10 @@ AVRDUDE_FLAGS= -F -V
 
 #==============   Source files    ============
 
-SUBDIRS := $(wildcard */) $(wildcard $(MOSLib)/*/)
-SOURCES := $(wildcard $(addsuffix *.c,$(SUBDIRS))) $(wildcard *.c)
-OBJFILES := $(patsubst %.c,%.o,$(SOURCES))
+SUBDIRS := $(wildcard */) $(wildcard $(OS_PATH)/*/) $(wildcard $(OS_PATH)/)
+SOURCES_C := $(wildcard $(addsuffix *.c,$(SUBDIRS))) $(wildcard *.c)
+SOURCES_CPP := $(wildcard $(addsuffix *.cpp,$(SUBDIRS))) $(wildcard *.cpp)
+OBJFILES := $(patsubst %.c,%.o,$(SOURCES_C)) $(patsubst %.cpp,%.o,$(SOURCES_CPP)) 
 
 #==============       Target      ===========
 
@@ -87,7 +99,11 @@ all: build
 
 #==========   Compile c files     =======
 %.o: %.c
-	$(CC) $(CFLAGS) -DF_CPU=$(ARDUINO_F_CPU) -I $(MOSLib) -mmcu=$(ARDUINO_MCU) -c -o $@ $<
+	$(CC) $(CFLAGS) -DF_CPU=$(ARDUINO_F_CPU) -I $(OS_PATH) -I $(PROJECT) -mmcu=$(ARDUINO_MCU) -c -o $@ $<
+
+#==========   Compile cpp files     =======
+%.o: %.cpp 
+	$(CXX) $(CPPFLAGS) -DF_CPU=$(ARDUINO_F_CPU) -I $(CURRENT_DIRECTORY)  -mmcu=$(ARDUINO_MCU) -c -o $@ $<
 
 #==========   link object files   =======
 %.elf: $(OBJFILES)
@@ -119,17 +135,6 @@ arduino-uno-upload:
 
 arduino-uno-upload-store-log:
 	$(MAKE) BOARD=uno upload-store-log
-
-#==========  BUILD AND UPLOAD FOR MEGA ADK ==============
-
-arduino-mega-adk:
-	$(MAKE) BOARD=megaADK build
-
-arduino-mega-adk-upload:
-	$(MAKE) BOARD=megaADK upload
-
-arduino-mega-adk-upload-store-log:
-	$(MAKE) BOARD=megaADK upload-store-log
 
 #=========   CLEAN ========
 clean:
