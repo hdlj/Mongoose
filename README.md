@@ -174,7 +174,7 @@ You don't need to specify the type of each variable except functions' arguments 
 Mongoose supports integers (int), floats (float), strings (str), lists (list) and booleans (bool). List can only stores at most 5 integers (int)
 
 
-## Hardware API
+# Hardware API
 
 #### Default led
 
@@ -228,7 +228,7 @@ You can take sample on an analog port
 
 ` HOSAnalogRead(2)   `   Read an anolog pin value.
 
-## Mongoose API
+# Mongoose API
 
 #### Atomic operation
 
