@@ -10,7 +10,7 @@ Additionally, Mongoose lets applications communicate with each other through cha
 Drivers for serial communication, digital devices, analog devices have been developed in this project. They offer basic features. Nonetheless, we try to have a clear and consistent hardware API.
 Applications can be written in C, in C++ or with a subset of Python. A development environment has been developed in this project. Python applications are translated to C thanks to the parser developed in this project. Developers can develop applications with any text editor or IDE. Uploading operating is done with a makefile. Clear APIs and the possibility of Python make this operating system more developer friendly.
 
-Mongoose has a small memory footprint: 0.5 of RAM and 6KB of ROM. In addition, time constraints are respected with an error, which can be predicted. Finally, the scheduler provides a predictive behaviour. Therefore, Mongoose respects requirements, quoted in chapter 3, of a real-time operating system and the objectives presented in chapter 1. Nonetheless, Mongoose does not manage Internet protocols.
+Mongoose has a small memory footprint: 0.5 of RAM and 6KB of ROM. In addition, time constraints are respected with an error, which can be predicted. Finally, the scheduler provides a predictive behaviour. Nonetheless, Mongoose does not manage Internet protocols.
 
 # Get started
 
