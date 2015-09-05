@@ -92,6 +92,27 @@ App3:
      -> Take samples on analog port 3 every 100 ms 
      -> Send result on channel 3 and read channel 2
 
+### Example 4
+
+App1:
+
+     -> Blink a LED on digital port 4 every second
+
+
+App2: 
+
+     -> Take samples on analog port 0 every second
+     -> Send result on channel 0
+     -> If a button is pressed on digital port 2, blink a LED on digital port 2 4 times (period 500 ms)
+
+
+App3: 
+
+     -> Read channel 0  five times successively
+     -> Compute an atomic operation with results
+     -> Read again channel 0
+
+
 ### Run an example
 
 * First, open the Makefile contained in Example0 folder and edit it with (it can be different with you computer):
@@ -122,7 +143,7 @@ $ cd Example0
 you can exit the screen mode with `CTRL+A+K` then `Y`. The logs will be contained in the current directory
 
 
-## Writing an application for Mongoose  MOSPython
+# Writing an application for Mongoose: MOSPython
 
 Applications can be written in C, C++ or Python.
 
